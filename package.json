@@ -1,0 +1,19 @@
+{
+  "name": "hexo-album-card",
+  "version": "1.0.2",
+  "description": "A hexo tag plugin for displaying album cards.",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "source"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hexo",
+    "album"
+  ],
+  "author": "Magstic",
+  "license": "MIT"
+}
