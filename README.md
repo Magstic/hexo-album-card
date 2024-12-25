@@ -53,4 +53,3 @@ npm i hexo-album-card
 ## 许可证
 
 MIT License © 2024 [Magstic](https://github.com/magstic)
-```

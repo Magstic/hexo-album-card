@@ -1,13 +1,26 @@
 'use strict';
 
-const fs = require('fs');
+const fs = require('hexo-fs');
 const path = require('path');
 
+// CSS资源位置
+const CSS_PATH = path.resolve(path.resolve(__dirname, "./source/css"), 'album-card.css');
+
+// 资源生成器
+hexo.extend.generator.register('album_asset', () => [{
+    path: 'css/album-card.css',
+    data: function() {
+        return fs.createReadStream(CSS_PATH);
+    }
+}]);
+
+// 注入CSS引用
 hexo.extend.filter.register('after_post_render', function(data) {
-  if (data.content.includes('album-card')) {
-    data.content = `<link rel="stylesheet" href="/css/album-card.css">\n${data.content}`;
-  }
-  return data;
+    if (data.content.includes('album-card')) {
+        let link_css = `<link rel="stylesheet" href="${hexo.config.root}css/album-card.css" type="text/css">`;
+        data.content = link_css + data.content;
+    }
+    return data;
 });
 
 const albumTag = (args, content) => {

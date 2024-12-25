@@ -1,7 +1,7 @@
 {
   "name": "hexo-album-card",
-  "version": "1.0.2",
-  "description": "A hexo tag plugin for displaying album cards.",
+  "version": "1.0.4",
+  "description": "A hexo tag plugin for displaying doujin album cards.",
   "main": "index.js",
   "files": [
     "index.js",
