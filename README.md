@@ -13,7 +13,7 @@ npm i hexo-album-card
 ## 使用方法
 
 ```markdown
-{% album "CD名" "CD編號" "發行時間" "發行展會" "版本備注" "簡要描述" "夾克URL" %}{% endalbum %}
+{% album "CD名" "CD編號" "發行時間" "發行展會" "版本備注" "簡要描述" "夾克URL" "下載URL" %}{% endalbum %}
 ```
 
 ### 参数说明
@@ -27,6 +27,15 @@ npm i hexo-album-card
 | 版本備注 | 否 | 版本備注 | "CD-R版" |
 | 簡要描述 | 是 | 簡要描述 | "RPG 全滅鋼琴曲集。" |
 | 夾克URL | 是 | 封面連結 | "/images/jacket.jpg" |
+| 下載URL | 否 | 下載鏈接 | "/images/jacket.jpg" |
+
+下載 URL ：
+如果寫 NO，則不渲染下載 ICON；
+如果不設置任何參數，則渲染無資源 ICON；
+如果内容包括 <code>archive</code> <code>khinside</code> <code>doujinstyle</code> 任一，則渲染下載 ICON；
+如果内容不包括 <code>archive</code> <code>khinside</code> <code>doujinstyle</code> 任一，則渲染有損 ICON。
+
+可配合 Hexo 的摺叠擴展添加 CD Track。
 
 ### 示例
 
