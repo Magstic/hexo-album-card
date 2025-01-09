@@ -26,23 +26,28 @@ hexo.extend.filter.register('after_post_render', function (data) {
 const albumTag = (args, content) => {
   const [title, number, date, event, note, description, imageUrl, downloadUrl] = args;
 
-  let downloadIcon;
-  if (downloadUrl === 'NO') {
-    downloadIcon = '';
-  } else if (!downloadUrl) {
-    downloadIcon = `<div class="album-download">
-      <i class="fa-solid fa-xmark"></i>
-    </div>`;
-  } else if (downloadUrl.includes('archive') || 
-             downloadUrl.includes('khinside') || 
-             downloadUrl.includes('doujinstyle')) {
-    downloadIcon = `<a href="${downloadUrl}" target="_blank" class="album-download">
-      <i class="fa-solid fa-cloud-arrow-down"></i>
-    </a>`;
+  const DOWNLOAD_ICONS = {
+    'NO': '',
+    'undefined': `<div class="album-download"><i class="fa-solid fa-xmark"></i></div>`,
+    'dlsite': `<i class="fa-solid fa-cart-shopping"></i>`,
+    'download': `<i class="fa-solid fa-cloud-arrow-down"></i>`,
+    'default': `<i class="fa-solid fa-file-circle-question"></i>`
+  };
+
+  const getIconType = (url) => {
+    if (!url) return 'undefined';
+    if (url === 'NO') return 'NO';
+    if (url.includes('dlsite')) return 'dlsite';
+    if (['archive', 'khinside', 'doujinstyle'].some(site => url.includes(site))) return 'download';
+    return 'default';
+  };
+
+  let downloadIcon = '';
+  const iconType = getIconType(downloadUrl);
+  if (iconType !== 'NO' && iconType !== 'undefined') {
+    downloadIcon = `<a href="${downloadUrl}" target="_blank" class="album-download">${DOWNLOAD_ICONS[iconType]}</a>`;
   } else {
-    downloadIcon = `<a href="${downloadUrl}" target="_blank" class="album-download">
-      <i class="fa-solid fa-file-circle-question"></i>
-    </a>`;
+    downloadIcon = DOWNLOAD_ICONS[iconType];
   }
 
   const template = `
@@ -70,7 +75,9 @@ const albumTag = (args, content) => {
         </div>
       </div>
       <div>
-        ${content}
+      ${content.replace(/(<li[^>]*>)(.*?)【RED】([\s\S]*?)(<\/li>)/g, (match, p1, p2, p3, p4) => {
+        return `${p1}<span class="red-mark">${p2}${p3}</span>${p4}`;
+      })}
       </div>
     </div>
   `;

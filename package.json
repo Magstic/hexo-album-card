@@ -1,11 +1,13 @@
 {
   "name": "hexo-album-card",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "description": "A hexo tag plugin for displaying doujin album cards.",
   "main": "index.js",
   "files": [
     "index.js",
-    "source"
+    "source",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
